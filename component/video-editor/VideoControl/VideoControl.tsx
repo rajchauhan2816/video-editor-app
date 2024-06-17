@@ -72,9 +72,9 @@ export const VideoControl = ({
         <div
           style={{ display: "flex", justifyContent: "end", marginRight: "5px" }}
         >
-          <Button disabled={!modifiedVideo}>
+          <Button disabled={!modifiedVideo} onClick={downloadVideo}>
             {!isMobile ? "Download" : ""}
-            <CloudDownloadOutlined onClick={downloadVideo} />
+            <CloudDownloadOutlined />
           </Button>
         </div>
       </Col>
