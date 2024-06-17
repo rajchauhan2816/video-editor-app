@@ -63,7 +63,13 @@ export const VideoPlayer = ({
 
   if (modifiedVideo) {
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <AdvancedVideo cldVid={modifiedVideo} controls />
       </div>
     );

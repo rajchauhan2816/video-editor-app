@@ -1,9 +1,12 @@
-import { Button, Col, Flex, Row, Space, Typography } from "antd";
-import Image from "next/image";
-import logo from "@/public/icons/logo.png";
+"use client";
+
 import { Effect } from "@/constant/effect";
-import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen/index";
+import logo from "@/public/icons/logo.png";
 import { CloudDownloadOutlined } from "@ant-design/icons";
+import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen/index";
+import { Button, Col, Row, Select, Space, Typography } from "antd";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface VideoControlProps {
   handleEffect: (effect: Effect) => void;
@@ -16,16 +19,7 @@ export const VideoControl = ({
   isVideoUplaoded,
   modifiedVideo,
 }: VideoControlProps) => {
-  const onClick = (effect: Effect) => {
-    handleEffect(effect);
-  };
-
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "demo",
-      apiKey: "t__Y4vUplqEbzxg1xT6_fecdgEY",
-    },
-  });
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const downloadVideo = () => {
     // Check if modifiedVideo exists and then trigger the download
@@ -38,6 +32,16 @@ export const VideoControl = ({
       window.open(downloadUrl, "_blank");
     }
   };
+
+  const handleChange = (value: any) => {
+    handleEffect(value);
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setIsMobile(window.matchMedia("(max-width: 600px)").matches);
+  }, []);
+
   return (
     <Row align={"middle"}>
       <Col span={4}>
@@ -53,12 +57,18 @@ export const VideoControl = ({
       <Col span={16}>
         {isVideoUplaoded ? (
           <Space>
-            <Typography.Text>Apply Effects</Typography.Text>
-            <Button onClick={() => onClick("REMOVE_BACKGROUND")}>
-              Remove Background
-            </Button>
-            <Button onClick={() => onClick("SLOW_MOTION")}>Slow Motion</Button>
-            <Button onClick={() => onClick("TRIM")}>Trim</Button>
+            <Typography.Text>Apply Effect</Typography.Text>
+            <Select
+              placeholder="Select"
+              onChange={handleChange}
+              style={{ minWidth: "200px" }}
+            >
+              <Select.Option value="REMOVE_BACKGROUND">
+                Remove Background
+              </Select.Option>
+              <Select.Option value="SLOW_MOTION">Slow Motion</Select.Option>
+              <Select.Option value="TRIM">Trim</Select.Option>
+            </Select>
           </Space>
         ) : null}
       </Col>
@@ -67,6 +77,7 @@ export const VideoControl = ({
           style={{ display: "flex", justifyContent: "end", marginRight: "5px" }}
         >
           <Button disabled={!modifiedVideo}>
+            {!isMobile ? "Download" : ""}
             <CloudDownloadOutlined onClick={downloadVideo} />
           </Button>
         </div>
