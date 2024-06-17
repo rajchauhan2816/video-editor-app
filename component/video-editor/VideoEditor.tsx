@@ -17,7 +17,6 @@ export const VideoEditor = () => {
   const [effect, setEffect] = useState<Effect | undefined>(undefined);
 
   const handleEffect = async (effect: Effect) => {
-    console.log(effect);
     setEffect(effect);
   };
 

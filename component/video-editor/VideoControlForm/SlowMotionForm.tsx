@@ -12,10 +12,7 @@ export const SlowMotionForm = ({
   video,
 }: SlowMotionFormProps) => {
   const applySlowMotion = (values: any) => {
-    console.log("values", values);
     let modifiedVideo = video.effect(accelerate().rate(values.rate));
-    // ("https://res.cloudinary.com/demo/video/upload/c_scale,w_400/sample-video-1_rxr8or?_a=DATAdtAAZAA0");
-    console.log("video", modifiedVideo.toURL());
     setModifiedVideo(modifiedVideo);
   };
   return (

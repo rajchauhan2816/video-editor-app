@@ -24,7 +24,6 @@ export const BackgroundRemovalForm = ({
         .tolerance(values.tolerance)
         .colorToReplace(colourReplace)
     );
-    console.log("video", modifiedVideo.toURL());
     setModifiedVideo(modifiedVideo);
   };
   return (

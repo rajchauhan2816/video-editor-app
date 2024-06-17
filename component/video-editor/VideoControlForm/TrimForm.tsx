@@ -8,19 +8,10 @@ interface TrimFormProps {
 }
 
 export const TrimForm = ({ setModifiedVideo, video }: TrimFormProps) => {
-  const getVideoDuration = async () => {
-    const videoElement = document.createElement("video");
-    videoElement.src = video.toURL();
-    videoElement.load();
-    videoElement.onloadedmetadata = () => {
-      console.log("videoElement.duration", videoElement.duration);
-    };
-  };
   const applyTrim = (values: any) => {
     let modifiedVideo = video.videoEdit(
       trim().startOffset(values.startOffset).endOffset(values.endOffset)
     );
-    console.log("video", modifiedVideo.toURL());
     setModifiedVideo(modifiedVideo);
   };
   return (

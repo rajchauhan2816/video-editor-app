@@ -3,24 +3,26 @@ import { BackgroundRemovalForm } from "./BackgroundRemovalForm";
 import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen/index";
 import { SlowMotionForm } from "./SlowMotionForm";
 import { TrimForm } from "./TrimForm";
+import {
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_CLOUD_NAME,
+} from "@/constant/environment";
 
 interface VideoControlFormProps {
   effect: Effect;
   setModifiedVideo: (video: CloudinaryVideo) => void;
   publicId: string;
-  //   video: CloudinaryVideo;
 }
 
 export const VideoControlForm = ({
   effect,
   setModifiedVideo,
-  //   video,
   publicId,
 }: VideoControlFormProps) => {
   const cld = new Cloudinary({
     cloud: {
-      cloudName: "demo",
-      apiKey: "t__Y4vUplqEbzxg1xT6_fecdgEY",
+      cloudName: CLOUDINARY_CLOUD_NAME,
+      apiKey: CLOUDINARY_API_KEY,
     },
   });
   const video = cld.video(publicId);

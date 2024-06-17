@@ -20,7 +20,6 @@ export const VideoPlayer = ({
   modifiedVideo,
 }: VideoPlayerProps) => {
   const [file, setFile] = useState<UploadFile | undefined>(undefined);
-  console.log("file", file);
   const [loading, setLoading] = useState<boolean>(false);
 
   const uploadFile = async (file: UploadFile) => {
@@ -37,7 +36,6 @@ export const VideoPlayer = ({
         body: fd,
       });
       const data = await res.json();
-      console.log("data1", data);
       setResponse(data);
     } catch (error) {
       console.error("Error uploading the file:", error);

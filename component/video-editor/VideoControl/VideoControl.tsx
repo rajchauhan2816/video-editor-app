@@ -24,11 +24,7 @@ export const VideoControl = ({
   const downloadVideo = () => {
     // Check if modifiedVideo exists and then trigger the download
     if (modifiedVideo) {
-      // Get the download URL
       const downloadUrl = modifiedVideo.toURL();
-
-      console.log("downloadUrl", downloadUrl);
-
       window.open(downloadUrl, "_blank");
     }
   };

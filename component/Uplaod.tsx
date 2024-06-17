@@ -21,7 +21,6 @@ const Uplaod: React.FC<UploadFileProps> = ({ setFile }) => {
     onChange(info) {
       const { status } = info.file;
       if (status !== "uploading") {
-        console.log(info.file, info.fileList);
       }
       if (status === "done") {
         setFile(info.file);
@@ -30,9 +29,7 @@ const Uplaod: React.FC<UploadFileProps> = ({ setFile }) => {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
-    onDrop(e) {
-      console.log("Dropped files", e.dataTransfer.files);
-    },
+    onDrop(e) {},
   };
   return (
     <Dragger {...props}>
