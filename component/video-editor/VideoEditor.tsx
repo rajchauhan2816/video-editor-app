@@ -28,7 +28,7 @@ export const VideoEditor = () => {
         isVideoUplaoded={!!response}
         modifiedVideo={modifiedVideo}
       />
-      <div style={{ padding: "20px 200px" }}>
+      <div>
         {effect && (
           <VideoControlForm
             effect={effect}

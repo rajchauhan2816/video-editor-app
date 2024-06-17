@@ -5,6 +5,7 @@ import { UploadResponse } from "@/types/cloudnary";
 import { AdvancedVideo } from "@cloudinary/react";
 import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen/index";
 import { Typography } from "antd";
+import { Spinner } from "../Spinner";
 
 interface VideoPlayerProps {
   setResponse: (response: UploadResponse) => void;
@@ -53,7 +54,12 @@ export const VideoPlayer = ({
     if (file) uploadFile(file);
   };
 
-  if (loading) return <Typography.Text>Uploading...</Typography.Text>;
+  if (loading)
+    return (
+      <div>
+        <Spinner text="Hang tight! We're processing your video." />
+      </div>
+    );
 
   if (modifiedVideo) {
     return (
@@ -72,7 +78,16 @@ export const VideoPlayer = ({
           style={{ width: "100%" }}
         />
       ) : (
-        <Uplaod setFile={setAndUpload} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "80vh",
+          }}
+        >
+          <Uplaod setFile={setAndUpload} />
+        </div>
       )}
     </div>
   );

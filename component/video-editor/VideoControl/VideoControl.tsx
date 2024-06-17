@@ -36,17 +36,6 @@ export const VideoControl = ({
       console.log("downloadUrl", downloadUrl);
 
       window.open(downloadUrl, "_blank");
-      // console.log("downloadUrl", downloadUrl);
-      // // Create a temporary anchor element
-      // const downloadLink = document.createElement("a");
-      // downloadLink.href = downloadUrl;
-      // downloadLink.download = "modified_video.mp4"; // Specify the file name here
-      // // Append the anchor element to the body
-      // document.body.appendChild(downloadLink);
-      // // Trigger the download
-      // downloadLink.click();
-      // // Clean up
-      // document.body.removeChild(downloadLink);
     }
   };
   return (
@@ -71,14 +60,16 @@ export const VideoControl = ({
             <Button onClick={() => onClick("SLOW_MOTION")}>Slow Motion</Button>
             <Button onClick={() => onClick("TRIM")}>Trim</Button>
           </Space>
-        ) : (
-          <Typography.Text>Upload a video to get started</Typography.Text>
-        )}
+        ) : null}
       </Col>
       <Col span={4}>
-        <Button>
-          <CloudDownloadOutlined onClick={downloadVideo} />
-        </Button>
+        <div
+          style={{ display: "flex", justifyContent: "end", marginRight: "5px" }}
+        >
+          <Button disabled={!modifiedVideo}>
+            <CloudDownloadOutlined onClick={downloadVideo} />
+          </Button>
+        </div>
       </Col>
     </Row>
   );

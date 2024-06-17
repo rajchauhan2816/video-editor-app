@@ -1,18 +1,6 @@
-import {
-  accelerate,
-  makeTransparent,
-  reverse,
-} from "@cloudinary/url-gen/actions/effect";
-import { source } from "@cloudinary/url-gen/actions/overlay";
-import { scale } from "@cloudinary/url-gen/actions/resize";
-import { concatenate } from "@cloudinary/url-gen/actions/videoEdit";
-import {
-  Cloudinary,
-  CloudinaryVideo,
-  Transformation,
-} from "@cloudinary/url-gen/index";
-import { videoSource } from "@cloudinary/url-gen/qualifiers/concatenate";
-import { Button, ColorPicker, Form, Input, Typography } from "antd";
+import { accelerate } from "@cloudinary/url-gen/actions/effect";
+import { CloudinaryVideo } from "@cloudinary/url-gen/index";
+import { Button, Form, Input } from "antd";
 
 interface SlowMotionFormProps {
   setModifiedVideo: (video: CloudinaryVideo) => void;

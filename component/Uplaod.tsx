@@ -40,11 +40,10 @@ const Uplaod: React.FC<UploadFileProps> = ({ setFile }) => {
         <InboxOutlined />
       </p>
       <p className="ant-upload-text">
-        Click or drag file to this area to upload
+        Click or drag video files to upload for editing
       </p>
       <p className="ant-upload-hint">
-        Support for a single or bulk upload. Strictly prohibited from uploading
-        company data or other banned files.
+        Enhanced with AI technology from Cloudinary
       </p>
     </Dragger>
   );

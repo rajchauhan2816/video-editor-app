@@ -2,6 +2,7 @@ import { Effect } from "@/constant/effect";
 import { BackgroundRemovalForm } from "./BackgroundRemovalForm";
 import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen/index";
 import { SlowMotionForm } from "./SlowMotionForm";
+import { TrimForm } from "./TrimForm";
 
 interface VideoControlFormProps {
   effect: Effect;
@@ -34,7 +35,7 @@ export const VideoControlForm = ({
     SLOW_MOTION: (
       <SlowMotionForm setModifiedVideo={setModifiedVideo} video={video} />
     ),
-    TRIM: <h1>Trim</h1>,
+    TRIM: <TrimForm setModifiedVideo={setModifiedVideo} video={video} />,
   };
 
   const renderEffectComponent = effectComponent[effect];
