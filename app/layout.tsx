@@ -2,7 +2,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import React from "react";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { Theme } from "./components/Theme";
+import { Theme } from "../component/Theme";
 
 export const metadata: Metadata = {
   title: "Video Editor",
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="size-full">
+      <body style={{ margin: 0, padding: 0 }}>
         <AntdRegistry>
           <Theme>{children}</Theme>
         </AntdRegistry>
