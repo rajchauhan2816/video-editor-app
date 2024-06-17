@@ -3,16 +3,11 @@ import Uplaod from "../Uplaod";
 import { RcFile, UploadFile } from "antd/es/upload";
 import { UploadResponse } from "@/types/cloudnary";
 import { AdvancedVideo } from "@cloudinary/react";
-import { CloudinaryVideo } from "@cloudinary/url-gen/index";
+import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen/index";
 import { Typography } from "antd";
+import { Spinner } from "../Spinner";
 
 interface VideoPlayerProps {
-  video: {
-    src: string;
-  } | null;
-  isPlaying: boolean;
-  onPlay: () => void;
-  onPause: () => void;
   setResponse: (response: UploadResponse) => void;
   modifiedVideo?: CloudinaryVideo;
 }
@@ -21,18 +16,11 @@ const cloudName = "demo";
 const unsignedUploadPreset = "doc_codepen_example";
 
 export const VideoPlayer = ({
-  video,
-  isPlaying,
-  onPlay,
-  onPause,
   setResponse,
   modifiedVideo,
 }: VideoPlayerProps) => {
   const [file, setFile] = useState<UploadFile | undefined>(undefined);
-  console.log("file", file);
   const [loading, setLoading] = useState<boolean>(false);
-
-  // remove background
 
   const uploadFile = async (file: UploadFile) => {
     setLoading(true);
@@ -48,7 +36,6 @@ export const VideoPlayer = ({
         body: fd,
       });
       const data = await res.json();
-      console.log("data", data);
       setResponse(data);
     } catch (error) {
       console.error("Error uploading the file:", error);
@@ -65,11 +52,22 @@ export const VideoPlayer = ({
     if (file) uploadFile(file);
   };
 
-  if (loading) return <Typography.Text>Uploading...</Typography.Text>;
+  if (loading)
+    return (
+      <div>
+        <Spinner text="Hang tight! We're processing your video." />
+      </div>
+    );
 
   if (modifiedVideo) {
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <AdvancedVideo cldVid={modifiedVideo} controls />
       </div>
     );
@@ -80,12 +78,20 @@ export const VideoPlayer = ({
       {file && file.originFileObj ? (
         <video
           src={URL.createObjectURL(file?.originFileObj)}
-          autoPlay={isPlaying}
           controls
           style={{ width: "100%" }}
         />
       ) : (
-        <Uplaod setFile={setAndUpload} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "80vh",
+          }}
+        >
+          <Uplaod setFile={setAndUpload} />
+        </div>
       )}
     </div>
   );

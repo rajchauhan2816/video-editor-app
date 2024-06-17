@@ -1,32 +1,44 @@
-import { Button, Col, Flex, Row, Space, Typography } from "antd";
-import Image from "next/image";
-import logo from "@/public/icons/logo.png";
+"use client";
+
 import { Effect } from "@/constant/effect";
+import logo from "@/public/icons/logo.png";
+import { CloudDownloadOutlined } from "@ant-design/icons";
+import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen/index";
+import { Button, Col, Row, Select, Space, Typography } from "antd";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface VideoControlProps {
-  isPlaying: boolean;
-  onPlay: () => void;
-  onPause: () => void;
   handleEffect: (effect: Effect) => void;
+  isVideoUplaoded?: boolean;
+  modifiedVideo?: CloudinaryVideo | undefined;
 }
 
 export const VideoControl = ({
-  isPlaying,
-  onPlay,
-  onPause,
   handleEffect,
+  isVideoUplaoded,
+  modifiedVideo,
 }: VideoControlProps) => {
-  const onClick = (effect: Effect) => {
-    handleEffect(effect);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  const downloadVideo = () => {
+    // Check if modifiedVideo exists and then trigger the download
+    if (modifiedVideo) {
+      const downloadUrl = modifiedVideo.toURL();
+      window.open(downloadUrl, "_blank");
+    }
   };
+
+  const handleChange = (value: any) => {
+    handleEffect(value);
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setIsMobile(window.matchMedia("(max-width: 600px)").matches);
+  }, []);
+
   return (
-    // <div>
-    //   {isPlaying ? (
-    //     <button onClick={onPause}>Pause</button>
-    //   ) : (
-    //     <button onClick={onPlay}>Play</button>
-    //   )}
-    // </div>
     <Row align={"middle"}>
       <Col span={4}>
         <Image
@@ -39,17 +51,32 @@ export const VideoControl = ({
         />
       </Col>
       <Col span={16}>
-        <Space>
-          <Typography.Text>Apply Effects</Typography.Text>
-          <Button onClick={() => onClick("REMOVE_BACKGROUND")}>
-            Remove Background
-          </Button>
-          <Button onClick={() => onClick("SLOW_MOTION")}>Slow Motion</Button>
-          <Button onClick={() => onClick("TRIM")}>Trim</Button>
-        </Space>
+        {isVideoUplaoded ? (
+          <Space>
+            <Typography.Text>Apply Effect</Typography.Text>
+            <Select
+              placeholder="Select"
+              onChange={handleChange}
+              style={{ minWidth: "200px" }}
+            >
+              <Select.Option value="REMOVE_BACKGROUND">
+                Remove Background
+              </Select.Option>
+              <Select.Option value="SLOW_MOTION">Slow Motion</Select.Option>
+              <Select.Option value="TRIM">Trim</Select.Option>
+            </Select>
+          </Space>
+        ) : null}
       </Col>
       <Col span={4}>
-        <Button>Save</Button>
+        <div
+          style={{ display: "flex", justifyContent: "end", marginRight: "5px" }}
+        >
+          <Button disabled={!modifiedVideo} onClick={downloadVideo}>
+            {!isMobile ? "Download" : ""}
+            <CloudDownloadOutlined />
+          </Button>
+        </div>
       </Col>
     </Row>
   );
