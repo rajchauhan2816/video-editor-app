@@ -3,16 +3,10 @@ import Uplaod from "../Uplaod";
 import { RcFile, UploadFile } from "antd/es/upload";
 import { UploadResponse } from "@/types/cloudnary";
 import { AdvancedVideo } from "@cloudinary/react";
-import { CloudinaryVideo } from "@cloudinary/url-gen/index";
+import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen/index";
 import { Typography } from "antd";
 
 interface VideoPlayerProps {
-  video: {
-    src: string;
-  } | null;
-  isPlaying: boolean;
-  onPlay: () => void;
-  onPause: () => void;
   setResponse: (response: UploadResponse) => void;
   modifiedVideo?: CloudinaryVideo;
 }
@@ -21,18 +15,12 @@ const cloudName = "demo";
 const unsignedUploadPreset = "doc_codepen_example";
 
 export const VideoPlayer = ({
-  video,
-  isPlaying,
-  onPlay,
-  onPause,
   setResponse,
   modifiedVideo,
 }: VideoPlayerProps) => {
   const [file, setFile] = useState<UploadFile | undefined>(undefined);
   console.log("file", file);
   const [loading, setLoading] = useState<boolean>(false);
-
-  // remove background
 
   const uploadFile = async (file: UploadFile) => {
     setLoading(true);
@@ -48,7 +36,7 @@ export const VideoPlayer = ({
         body: fd,
       });
       const data = await res.json();
-      console.log("data", data);
+      console.log("data1", data);
       setResponse(data);
     } catch (error) {
       console.error("Error uploading the file:", error);
@@ -80,7 +68,6 @@ export const VideoPlayer = ({
       {file && file.originFileObj ? (
         <video
           src={URL.createObjectURL(file?.originFileObj)}
-          autoPlay={isPlaying}
           controls
           style={{ width: "100%" }}
         />
