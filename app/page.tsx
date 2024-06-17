@@ -1,7 +1,9 @@
+import { VideoEditor } from "@/component/video-editor/VideoEditor";
+
 const Page = () => {
   return (
     <div>
-      <h1>Video Editor</h1>
+      <VideoEditor />
     </div>
   );
 };

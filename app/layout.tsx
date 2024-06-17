@@ -2,7 +2,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import React from "react";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { Theme } from "./components/Theme";
+import { Theme } from "../component/Theme";
 
 export const metadata: Metadata = {
   title: "Video Editor",
