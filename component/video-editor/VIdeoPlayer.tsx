@@ -74,24 +74,18 @@ export const VideoPlayer = ({
   }
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "80vh",
+      }}
+    >
       {file && file.originFileObj ? (
-        <video
-          src={URL.createObjectURL(file?.originFileObj)}
-          controls
-          style={{ width: "100%" }}
-        />
+        <video src={URL.createObjectURL(file?.originFileObj)} controls />
       ) : (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "80vh",
-          }}
-        >
-          <Uplaod setFile={setAndUpload} />
-        </div>
+        <Uplaod setFile={setAndUpload} />
       )}
     </div>
   );
