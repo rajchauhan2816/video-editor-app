@@ -5,7 +5,7 @@ export const Theme = ({ children }: { children: React.ReactNode }) => {
   return (
     <ConfigProvider
       theme={{
-        algorithm: theme.defaultAlgorithm,
+        algorithm: theme.darkAlgorithm,
       }}
     >
       {children}

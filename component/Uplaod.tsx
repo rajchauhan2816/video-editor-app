@@ -10,6 +10,9 @@ interface UploadFileProps {
   setFile: (file: UploadFile | undefined) => void;
 }
 
+const cloudName = "demo";
+const unsignedUploadPreset = "doc_codepen_example";
+
 const Uplaod: React.FC<UploadFileProps> = ({ setFile }) => {
   const props: UploadProps = {
     name: "file",
@@ -22,7 +25,7 @@ const Uplaod: React.FC<UploadFileProps> = ({ setFile }) => {
       }
       if (status === "done") {
         setFile(info.file);
-        message.success(`${info.file.name} file uploaded successfully.`);
+        // message.success(`${info.file.name} file uploaded successfully.`);
       } else if (status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }

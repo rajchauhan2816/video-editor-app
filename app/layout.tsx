@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="size-full">
+      <body style={{ margin: 0, padding: 0 }}>
         <AntdRegistry>
           <Theme>{children}</Theme>
         </AntdRegistry>

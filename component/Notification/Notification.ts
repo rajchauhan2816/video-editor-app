@@ -10,6 +10,9 @@ const Notification = (
   notification[type]({
     message: message,
     description: description,
+    style: {
+      borderRadius: 5,
+    },
   });
 };
 
